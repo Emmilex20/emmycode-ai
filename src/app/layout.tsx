@@ -20,6 +20,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "EmmyFlex AI - GET JACKED",
   description: "A mordern fitness AI platform to get jacked for free.",
+  icons: {
+    icon: "/ai-avatar.svg", // or .png or .svg, depending on your file
+  },
 };
 
 export default function RootLayout({
