@@ -1,8 +1,20 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { SignInButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs";
-import { DumbbellIcon, HomeIcon, UserIcon, ZapIcon, MenuIcon, XIcon } from "lucide-react";
+import {
+  SignInButton,
+  SignUpButton,
+  UserButton,
+  useUser,
+} from "@clerk/nextjs";
+import {
+  DumbbellIcon,
+  HomeIcon,
+  UserIcon,
+  ZapIcon,
+  MenuIcon,
+  XIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
 
@@ -15,12 +27,12 @@ const Navbar = () => {
     setIsClient(true);
   }, []);
 
-  if (!isClient) return null; // Or a loading state
+  if (!isClient) return null;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-md border-b border-border py-3">
       <div className="container mx-auto flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2" onClick={() => setMenuOpen(false)}>
           <div className="p-1 bg-primary/10 rounded">
             <ZapIcon className="w-4 h-4 text-primary" />
           </div>
@@ -43,17 +55,29 @@ const Navbar = () => {
         >
           {isSignedIn ? (
             <>
-              <Link href="/" className="flex items-center gap-1.5 text-sm hover:text-primary">
+              <Link
+                href="/"
+                className="flex items-center gap-1.5 text-sm hover:text-primary"
+                onClick={() => setMenuOpen(false)}
+              >
                 <HomeIcon size={16} />
                 <span>Home</span>
               </Link>
 
-              <Link href="/generate-program" className="flex items-center gap-1.5 text-sm hover:text-primary">
+              <Link
+                href="/generate-program"
+                className="flex items-center gap-1.5 text-sm hover:text-primary"
+                onClick={() => setMenuOpen(false)}
+              >
                 <DumbbellIcon size={16} />
                 <span>Generate</span>
               </Link>
 
-              <Link href="/profile" className="flex items-center gap-1.5 text-sm hover:text-primary">
+              <Link
+                href="/profile"
+                className="flex items-center gap-1.5 text-sm hover:text-primary"
+                onClick={() => setMenuOpen(false)}
+              >
                 <UserIcon size={16} />
                 <span>Profile</span>
               </Link>
@@ -63,7 +87,9 @@ const Navbar = () => {
                 variant="outline"
                 className="border-primary/50 text-primary hover:text-white hover:bg-primary/10"
               >
-                <Link href="/generate-program">Get Started</Link>
+                <Link href="/generate-program" onClick={() => setMenuOpen(false)}>
+                  Get Started
+                </Link>
               </Button>
 
               <div className="md:hidden">
@@ -74,15 +100,19 @@ const Navbar = () => {
             <>
               <SignInButton>
                 <Button
-                  variant={"outline"}
+                  variant="outline"
                   className="border-primary/50 text-primary hover:text-white hover:bg-primary/10"
+                  onClick={() => setMenuOpen(false)}
                 >
                   Sign In
                 </Button>
               </SignInButton>
 
               <SignUpButton>
-                <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+                <Button
+                  className="bg-primary text-primary-foreground hover:bg-primary/90"
+                  onClick={() => setMenuOpen(false)}
+                >
                   Sign Up
                 </Button>
               </SignUpButton>
@@ -90,7 +120,11 @@ const Navbar = () => {
           )}
         </nav>
 
-        {isSignedIn && <div className="hidden md:block"><UserButton /></div>}
+        {isSignedIn && (
+          <div className="hidden md:block">
+            <UserButton />
+          </div>
+        )}
       </div>
     </header>
   );
