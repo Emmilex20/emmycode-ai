@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SignInButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs";
 import { DumbbellIcon, HomeIcon, UserIcon, ZapIcon, MenuIcon, XIcon } from "lucide-react";
 import Link from "next/link";
@@ -9,11 +9,17 @@ import { Button } from "./ui/button";
 const Navbar = () => {
   const { isSignedIn } = useUser();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null; // Or a loading state
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-md border-b border-border py-3">
       <div className="container mx-auto flex items-center justify-between">
-        {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <div className="p-1 bg-primary/10 rounded">
             <ZapIcon className="w-4 h-4 text-primary" />
@@ -23,7 +29,6 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* Mobile menu toggle */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden focus:outline-none"
@@ -31,7 +36,6 @@ const Navbar = () => {
           {menuOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
         </button>
 
-        {/* Navigation Links */}
         <nav
           className={`${
             menuOpen ? "flex" : "hidden"
@@ -86,7 +90,6 @@ const Navbar = () => {
           )}
         </nav>
 
-        {/* Desktop UserButton */}
         {isSignedIn && <div className="hidden md:block"><UserButton /></div>}
       </div>
     </header>

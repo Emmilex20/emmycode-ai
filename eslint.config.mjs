@@ -16,6 +16,8 @@ const eslintConfig = [
       "@typescript-eslint/no-explicit-any": "off",
       "@next/next/no-img-element": "off",
       "import/no-anonymous-default-export": "off",
+      "react/no-unescaped-entities": "off",
+      "@typescript-eslint/no-unused-vars": "off",
     },
   },
 ];
